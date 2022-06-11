@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
 
@@ -51,21 +50,4 @@ void mergeSort(int * vetor, int start, int end)
         merge(vetor, start, mid, end);
 
     }
-}
-
-void print(int vetor[], int size)
-{
-    for(int i = 0; i <= size; i++){
-        printf("[%d] ", vetor[i]);
-    }
-    printf("\n");
-}
-
-void main()
-{
-    int vetor[] = {3, 4, 9, 2, 5, 8, 2, 1, 7, 4, 6, 2, 9, 8, 5, 1};
-    int end = sizeof(vetor) / sizeof(int) - 1;
-    print(vetor, end);
-    mergeSort(vetor, 0, end);
-    print(vetor, end);
 }
