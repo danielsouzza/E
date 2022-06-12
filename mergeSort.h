@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 
+// Função para fazer a ordenação [Conquistar]
 void merge(int * vetor, int start, int mid, int end)
 {  
     int * temp, p1, p2, size, i , j, k;
@@ -16,6 +17,7 @@ void merge(int * vetor, int start, int mid, int end)
         {
             if(!end1 && !end2)
             {
+                // Comparar e colocar de forma ordenada no vetor temporário [temp]
                 if(vetor[p1] < vetor[p2])
                 {
                     temp[i] = vetor[p1++];
@@ -23,9 +25,11 @@ void merge(int * vetor, int start, int mid, int end)
                     temp[i] = vetor[p2++];
                 }
 
-                if(p1 > mid) end1 = 1;
+                // Verificar se o vetor chegou no fim
+                if(p1 > mid) end1 = 1; 
                 if(p2 > end) end2 = 1;
             }else{
+                // Copiar o elemento restante para temp
                 if(!end1)
                 {
                     temp[i] = vetor[p1++];
@@ -39,11 +43,13 @@ void merge(int * vetor, int start, int mid, int end)
     free(temp);
 }
 
+//  Função para fazer a divisão do vetor de forma recursiva
 void mergeSort(int * vetor, int start, int end)
 {
     int mid;
     if(start < end)
     {
+
         mid = floor((start + end) / 2);
         mergeSort(vetor,start, mid);
         mergeSort(vetor,mid+1, end);
