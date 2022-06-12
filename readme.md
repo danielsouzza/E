@@ -1,8 +1,8 @@
 # Algoritmos de Ordenação
-1)Método Bolha (Bubble Sort)
-2) QuickSort
-3) Seleção Direta (Selection Sort)
-4) HeapSort
-5) Inserção Direta
-6) ShellSort
+1)Método Bolha (Bubble Sort) <br>
+2) QuickSort <br>
+3) Seleção Direta (Selection Sort) <br>
+4) HeapSort <br>
+5) Inserção Direta <br>
+6) ShellSort <br>
 7) Intercalação (MergeSort)
