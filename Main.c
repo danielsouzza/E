@@ -3,7 +3,7 @@
 #include <time.h>
 #include "mergeSort.h"
 
-const int t = 80000; // Tamanho do vetor
+const int t = 1000; // Tamanho do vetor
 
 // Função para printar
 void print(int vetor[], int size)
@@ -23,6 +23,18 @@ void generateVector(int * vetor){
     }
 }
 
+// Inverte o vetor
+void invertVector(int vetor[])
+{
+    int mid = t / 2;
+    for(int i = 0, j = t-1; i < mid; i++, j--)
+    {
+        int aux = vetor[i];
+        vetor[i] = vetor[j];
+        vetor[j] = aux;
+    }
+}
+
 void main()
 {
     double tempo; // Armazena o tempo da ordenação
@@ -39,6 +51,7 @@ void main()
     mergeSort(vetor, 0, end); // Chama o algoritmo que está em [mergeSort.h]
     t_end = time(NULL);
     tempo = difftime(t_end, t_start);
+    print(vetor, end);
     print(vetor, end);
     printf("O tempo de ordenaçao: %fs\n", tempo); 
 }
