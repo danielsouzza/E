@@ -3,23 +3,34 @@
 #include <time.h>
 #include "mergeSort.h"
 
-const int t = 1000; // Tamanho do vetor
+const int t = 80000; // Tamanho do vetor
 
 // Função para printar
-void print(int vetor[], int size)
+void print(int vetor[])
 {
-    for(int i = 0; i <= size; i++){
+    for (int i = 0; i < t; i++)
+    {
         printf("[%d] ", vetor[i]);
     }
     printf("\n");
 }
 
 // Gerar um vetor aleatorio
-void generateVector(int * vetor){
+void generateVectores(int vetor1[], int vetor2[], int vetor3[],int vetor4[],int vetor5[],int vetor6[],int vetor7[])
+{
     srand(time(NULL)); // Gera uma semente comforme o tempo
     for (int i = 0; i < t; i++)
     {
-        vetor[i] = rand() % t; 
+        int aux = rand() % t;
+        vetor1[i] = aux;
+        vetor2[i] = aux;
+        vetor3[i] = aux;
+        vetor4[i] = aux;
+        vetor5[i] = aux;
+        vetor6[i] = aux;
+        vetor7[i] = aux;
+        
+
     }
 }
 
@@ -27,7 +38,7 @@ void generateVector(int * vetor){
 void invertVector(int vetor[])
 {
     int mid = t / 2;
-    for(int i = 0, j = t-1; i < mid; i++, j--)
+    for (int i = 0, j = t - 1; i < mid; i++, j--)
     {
         int aux = vetor[i];
         vetor[i] = vetor[j];
@@ -35,23 +46,34 @@ void invertVector(int vetor[])
     }
 }
 
-void main()
+double caso(int vetor[], int end)
 {
-    double tempo; // Armazena o tempo da ordenação
-    time_t t_start;// t_start pega o tempo inicial
-    time_t t_end; // t_end pega o tempo final
+    time_t t_start; // t_start pega o tempo inicial
+    time_t t_end;   // t_end pega o tempo final
 
-    int vetor[t];
-    int end = t -1;
-    generateVector(vetor);
-
-    // Merge Sort
-    print(vetor, end);
-    t_start = time(NULL); 
+    t_start = time(NULL);
     mergeSort(vetor, 0, end); // Chama o algoritmo que está em [mergeSort.h]
     t_end = time(NULL);
-    tempo = difftime(t_end, t_start);
-    print(vetor, end);
-    print(vetor, end);
-    printf("O tempo de ordenaçao: %fs\n", tempo); 
+
+    return difftime(t_end,t_start);
+}
+
+void main()
+{
+    double tempo[3]; // Armazena o tempo da ordenação
+
+    int vetor1[t],vetor2[t], vetor3[t], vetor4[t], vetor5[t],vetor6[t], vetor7[t];
+    int end = t - 1;
+    generateVectores(vetor1,vetor2,vetor3, vetor4, vetor5, vetor6, vetor7);
+
+    // Merge Sort
+    tempo[0] = caso(vetor1, end);
+    tempo[1] = caso(vetor1, end);
+    invertVector(vetor1);
+    tempo[2] = caso(vetor1, end);
+
+
+    printf("O tempo de ordenaçao no caso medio.: %fs\n", tempo[0]);  
+    printf("O tempo de ordenaçao no melhor caso: %fs\n", tempo[1]);
+    printf("O tempo de ordenaçao no pior caso..: %fs\n", tempo[2]);
 }
