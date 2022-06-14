@@ -1,25 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "mergeSort.h"
-
-const int t = 1000; // Tamanho do vetor
+#include "quickSort.h"
+#DEFINE T 10 // Tamanho do vetor teste
 
 // Função para printar
 void print(int vetor[], int size)
 {
+    printf("[");
     for(int i = 0; i <= size; i++){
-        printf("[%d] ", vetor[i]);
+        printf("%3d", vetor[i]);
     }
+    printf("  ]");
     printf("\n");
 }
 
 // Gerar um vetor aleatorio
-void generateVector(int * vetor){
-    srand(time(NULL)); // Gera uma semente comforme o tempo
-    for (int i = 0; i < t; i++)
+void generateVector(int * vetor)
+{
+    char insp; // inspeciona se existe um número repetido
+    srand(time(NULL)); // Gera uma semente conforme o tempo
+    for (int i = 0; i < T; i++)
     {
-        vetor[i] = rand() % t; 
+        vetor[i] = rand() % 20;
+        insp = 'n';
+        for(int j = 0; j<i && insp == 'n'; j++)
+        {
+            if (vetor[i] == vetor[j])
+            {
+                insp = 's';
+            }
+        }
+        if(insp == 's')
+        {
+            i--; //impede o incremento e sorteia novamente
+        }
     }
 }
 
@@ -38,20 +53,20 @@ void invertVector(int vetor[])
 void main()
 {
     double tempo; // Armazena o tempo da ordenação
-    time_t t_start;// t_start pega o tempo inicial
-    time_t t_end; // t_end pega o tempo final
+    time_t t_start, t_end;// tempo inicial e tempo final
 
-    int vetor[t];
-    int end = t -1;
+    int vetor[T];
+    
     generateVector(vetor);
+    print(vetor);
 
-    // Merge Sort
-    print(vetor, end);
+    // Testando Quick Sort
+    
     t_start = time(NULL); 
     mergeSort(vetor, 0, end); // Chama o algoritmo que está em [mergeSort.h]
-    t_end = time(NULL);
+    time(&t_end);
     tempo = difftime(t_end, t_start);
-    print(vetor, end);
-    print(vetor, end);
-    printf("O tempo de ordenaçao: %fs\n", tempo); 
+    
+    print(vetor);
+    printf("O tempo de ordenaçao: %.1fs\n", tempo); 
 }
