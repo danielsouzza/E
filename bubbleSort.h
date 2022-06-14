@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include <time.h>
+#include<stdbool.h>
+
 void swap(int *j1, int *j2)
 {
     int aux = *j1;
@@ -25,14 +29,12 @@ void bubbleSort(int vetor[], int tamanho)
 
 double TimeBubble(int vetor[], int size)
 {
-    time_t t_start; // t_start pega o tempo inicial
-    time_t t_end;   // t_end pega o tempo final
-
-    t_start = time(NULL);
+    clock_t Ticks[2];
+    Ticks[0] = clock();  // t_end pega o tempo final
     bubbleSort(vetor, size); // Chama o algoritmo que está em [mergeSort.h]
-    t_end = time(NULL);
+    Ticks[1] = clock();
 
-    return difftime(t_end,t_start);
+    return (double)(Ticks[1] - Ticks[0]) / (double)CLOCKS_PER_SEC;
 }
 
 /*

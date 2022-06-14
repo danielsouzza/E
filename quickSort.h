@@ -1,14 +1,15 @@
-#include<stdio.h>
+#include <time.h>
+#include <stdlib.h>
 
 //Ordenação por troca ou Exchange Sort
 //Dividir para conquistar
 
-void swap(int *ii, int *jj)
-{
-    int aux = *ii;
-    *ii = *jj;
-    *jj = aux;
-}//troca o elemento
+// void swap(int *ii, int *jj)
+// {
+//     int aux = *ii;
+//     *ii = *jj;
+//     *jj = aux;
+// }//troca o elemento
 
 int particionar (int vet[], int inicial, int final)
 {
@@ -37,6 +38,17 @@ void quickSort(int vet[], int inicial, int final)
         quickSort(vet, pi + 1, final);
     }
 }
+
+double TimeQuick(int vetor[], int size)
+{
+    clock_t Ticks[2];
+    Ticks[0] = clock();  // t_end pega o tempo final
+    quickSort(vetor, 0, size); // Chama o algoritmo que está em [mergeSort.h]
+    Ticks[1] = clock();
+
+    return (double)(Ticks[1] - Ticks[0]) / (double)CLOCKS_PER_SEC;
+}
+
 /*
  inicial -> 0
  final -> tamanho do vetor - 1 (80000 -1)

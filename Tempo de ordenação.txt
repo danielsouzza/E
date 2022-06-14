@@ -1,0 +1,4 @@
+Algoritmos,Caso médio,Melhor caso,Pior caso
+MergeSort,0.021771,0.013963,0.010983
+BubbleSort,24.930916,8.054649,24.690312
+QuickSort,0.013356,15.705578,12.827633
