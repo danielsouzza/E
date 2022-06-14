@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 
 // Função para fazer a ordenação [Conquistar]
@@ -56,4 +57,16 @@ void mergeSort(int * vetor, int start, int end)
         merge(vetor, start, mid, end);
 
     }
+}
+
+double TimeMerge(int vetor[], int end)
+{
+    time_t t_start; // t_start pega o tempo inicial
+    time_t t_end;   // t_end pega o tempo final
+
+    t_start = time(NULL);
+    mergeSort(vetor, 0, end); // Chama o algoritmo que está em [mergeSort.h]
+    t_end = time(NULL);
+
+    return difftime(t_end,t_start);
 }

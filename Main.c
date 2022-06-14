@@ -4,7 +4,7 @@
 #include "mergeSort.h"
 #include "bubbleSort.h"
 
-const int t = 80000; // Tamanho do vetor
+const int t = 10; // Tamanho do vetor
 
 // Função para printar
 void print(int vetor[])
@@ -17,7 +17,7 @@ void print(int vetor[])
 }
 
 // Gerar um vetor aleatorio
-void generateVectores(int vetor1[], int vetor2[], int vetor3[],int vetor4[],int vetor5[],int vetor6[],int vetor7[])
+void generateVectors(int vetor1[], int vetor2[], int vetor3[],int vetor4[],int vetor5[],int vetor6[],int vetor7[])
 {
     srand(time(NULL)); // Gera uma semente comforme o tempo
     for (int i = 0; i < t; i++)
@@ -47,29 +47,7 @@ void invertVector(int vetor[])
     }
 }
 
-double casosMerge(int vetor[], int end)
-{
-    time_t t_start; // t_start pega o tempo inicial
-    time_t t_end;   // t_end pega o tempo final
 
-    t_start = time(NULL);
-    mergeSort(vetor, 0, end); // Chama o algoritmo que está em [mergeSort.h]
-    t_end = time(NULL);
-
-    return difftime(t_end,t_start);
-}
-
-double casoBubble(int vetor[])
-{
-    time_t t_start; // t_start pega o tempo inicial
-    time_t t_end;   // t_end pega o tempo final
-
-    t_start = time(NULL);
-    bubbleSort(vetor, t); // Chama o algoritmo que está em [mergeSort.h]
-    t_end = time(NULL);
-
-    return difftime(t_end,t_start);
-}
 
 void main()
 {
@@ -77,24 +55,24 @@ void main()
 
     int vetor1[t],vetor2[t], vetor3[t], vetor4[t], vetor5[t],vetor6[t], vetor7[t];
     int end = t - 1;
-    generateVectores(vetor1,vetor2,vetor3, vetor4, vetor5, vetor6, vetor7);
+    generateVectors(vetor1,vetor2,vetor3, vetor4, vetor5, vetor6, vetor7);
 
     // Merge Sort
-    tempo[0] = casosMerge(vetor1, end);
-    tempo[1] = casosMerge(vetor1, end);
+    tempo[0] = TimeMerge(vetor1, end);
+    tempo[1] = TimeMerge(vetor1, end);
     invertVector(vetor1);
-    tempo[2] = casosMerge(vetor1, end);
-
+    tempo[2] = TimeMerge(vetor1, end);
 
     printf("MergeSort no caso médio.: %fs\n", tempo[0]);  
     printf("MergeSort no melhor caso: %fs\n", tempo[1]);
     printf("MergeSort no pior caso..: %fs\n", tempo[2]);
 
+
     // Bubblesort
-    tempo[0] = casoBubble(vetor2);
-    tempo[1] = casoBubble(vetor2);
-    invertVector(vetor1);
-    tempo[2] = casoBubble(vetor2);
+    tempo[0] = TimeBubble(vetor2, t);
+    tempo[1] = TimeBubble(vetor2, t);
+    invertVector(vetor2);
+    tempo[2] = TimeBubble(vetor2, t);
 
     printf("BubbleSort caso médio.: %fs\n", tempo[0]);  
     printf("BubbleSort melhor caso: %fs\n", tempo[1]);
