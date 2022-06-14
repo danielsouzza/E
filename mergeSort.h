@@ -1,6 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
 
 
 // Função para fazer a ordenação [Conquistar]

@@ -1,3 +1,7 @@
+#include <stdlib.h>
+#include <time.h>
+#include<stdbool.h>
+
 void swap(int *j1, int *j2)
 {
     int aux = *j1;
