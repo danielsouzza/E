@@ -5,7 +5,9 @@
 #include <stdbool.h>
 #include "mergeSort.h"
 #include "quickSort.h"
+#include "shellSort.h"
 #include "bubbleSort.h"
+#include "insertionSort.h"
 
 const int t = 80000; // Tamanho do vetor
 
@@ -73,6 +75,7 @@ void main()
     tempo[1] = TimeMerge(vetor1, end); // Melhor
     invertVector(vetor1);
     tempo[2] = TimeMerge(vetor1, end); // Pior
+
     fprintf(dados,"%s", "MergeSort,"); 
     fprintf(dados,"%f,", tempo[0]);  
     fprintf(dados,"%f,", tempo[1]);
@@ -98,6 +101,28 @@ void main()
     tempo[2] = TimeQuick(vetor3, end);
 
     fprintf(dados,"%s", "QuickSort,");
+    fprintf(dados,"%f,", tempo[0]);  
+    fprintf(dados,"%f,", tempo[1]);
+    fprintf(dados,"%f\n", tempo[2]);
+
+    // InsertionSort
+    tempo[0] = TimeInsertion(vetor4, t);
+    tempo[1] = TimeInsertion(vetor4, t);
+    invertVector(vetor4);
+    tempo[2] = TimeInsertion(vetor4, t);
+
+    fprintf(dados,"%s", "InsertionSort,");
+    fprintf(dados,"%f,", tempo[0]);  
+    fprintf(dados,"%f,", tempo[1]);
+    fprintf(dados,"%f\n", tempo[2]);
+
+    // ShellSort
+    tempo[0] = TimeInsertion(vetor5, t);
+    tempo[1] = TimeInsertion(vetor5, t);
+    invertVector(vetor5);
+    tempo[2] = TimeInsertion(vetor5, t);
+
+    fprintf(dados,"%s", "ShellSort,");
     fprintf(dados,"%f,", tempo[0]);  
     fprintf(dados,"%f,", tempo[1]);
     fprintf(dados,"%f\n", tempo[2]);
