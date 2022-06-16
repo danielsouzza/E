@@ -3,8 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include "util.h"
 #include "mergeSort.h"
 #include "quickSort.h"
+#include "selectionSort.h"
+#include "heapSort.h"
 #include "shellSort.h"
 #include "bubbleSort.h"
 #include "insertionSort.h"
@@ -104,6 +107,28 @@ void main()
     fprintf(dados,"%f,", tempo[0]);  
     fprintf(dados,"%f,", tempo[1]);
     fprintf(dados,"%f\n", tempo[2]);
+
+	// SelectionSort
+	tempo[0] = TimeSelection(vetor6, t);
+	tempo[1] = TimeSelection(vetor6, t);
+	invertVector(vetor6);
+	tempo[2] = TimeSelection(vetor6, t);
+
+	fprintf(dados, "%s", "SelectionSort,");
+	fprintf(dados, "%f,", tempo[0]);
+	fprintf(dados, "%f,", tempo[1]);
+	fprintf(dados, "%f\n", tempo[2]);
+
+	// HeapSort
+	tempo[0] = TimeHeap(vetor7, t);
+	tempo[1] = TimeHeap(vetor7, t);
+	invertVector(vetor7);
+	tempo[2] = TimeHeap(vetor7, t);
+	
+	fprintf(dados, "%s", "HeapSort,");
+	fprintf(dados, "%f,", tempo[0]);
+	fprintf(dados, "%f,", tempo[1]);
+	fprintf(dados, "%f\n", tempo[2]);
 
     // InsertionSort
     tempo[0] = TimeInsertion(vetor4, t);
