@@ -2,12 +2,12 @@
 #include <time.h>
 #include<stdbool.h>
 
-void swap(int *j1, int *j2)
-{
-    int aux = *j1;
-    *j1 = *j2;
-    *j2 = aux;
-}
+// void swap(int *j1, int *j2)
+// {
+//     int aux = *j1;
+//     *j1 = *j2;
+//     *j2 = aux;
+// }
 
 void bubbleSort(int vetor[], int tamanho)
 {
