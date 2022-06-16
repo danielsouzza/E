@@ -21,4 +21,13 @@ void selectionSort(int array[], int size) {
 	}
 }
 
+// Computar tempo de execução do SelectionSort
+double timeSelection(int array[], int size) {
+	clock_t Ticks[2];				// Tempo inicial e final
+	Ticks[0] = clock(); 			// Início
+	selectionSort(array, size);		// Execução
+	Ticks[1] = clock();				// Fim
+	return (double) (Ticks[1] - Ticks[0]) / (double) CLOCKS_PER_SEC;
+}
+
 #endif
