@@ -1,13 +1,3 @@
-#ifndef heapSort
-#define heapSort
-
-// Troca de elementos
-void swap(int *a, int *b) {
-	int temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
 // Empilhar (max heap)
 void heapify(int array[], int size, int root) {
 	int largest = root;
@@ -37,12 +27,10 @@ void heapSort(int array[], int size) {
 }
 
 // Computar tempo de execução do HeapSort
-double timeHeap(int array[], int size) {
+double TimeHeap(int array[], int size) {
 	clock_t Ticks[2];				// Tempo inicial e final
 	Ticks[0] = clock(); 			// Início
 	heapSort(array, size);			// Execução
 	Ticks[1] = clock();				// Fim
 	return (double) (Ticks[1] - Ticks[0]) / (double) CLOCKS_PER_SEC;
 }
-
-#endif

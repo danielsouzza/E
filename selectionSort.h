@@ -1,13 +1,3 @@
-#ifndef selectionSort
-#define selectionSort
-
-// Troca de elementos
-void swap(int *a, int *b) {
-	int temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
 // Ordenação por seleção direta
 void selectionSort(int array[], int size) {
 	for (int i = 0; i < size; i++) {
@@ -22,12 +12,10 @@ void selectionSort(int array[], int size) {
 }
 
 // Computar tempo de execução do SelectionSort
-double timeSelection(int array[], int size) {
+double TimeSelection(int array[], int size) {
 	clock_t Ticks[2];				// Tempo inicial e final
 	Ticks[0] = clock(); 			// Início
 	selectionSort(array, size);		// Execução
 	Ticks[1] = clock();				// Fim
 	return (double) (Ticks[1] - Ticks[0]) / (double) CLOCKS_PER_SEC;
 }
-
-#endif
