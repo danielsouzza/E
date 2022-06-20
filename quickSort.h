@@ -1,15 +1,6 @@
 #include <time.h>
 #include <stdlib.h>
 
-//Ordenação por troca ou Exchange Sort
-//Dividir para conquistar
-
-// void swap(int *ii, int *jj)
-// {
-//     int aux = *ii;
-//     *ii = *jj;
-//     *jj = aux;
-// }//troca o elemento
 
 int particionar (int vet[], int inicial, int final)
 {

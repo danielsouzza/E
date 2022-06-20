@@ -1,6 +1,9 @@
-Algoritmos,Caso médio,Melhor caso,Pior caso
-MergeSort,0.024098,0.016795,0.013572
-BubbleSort,25.225837,8.201425,24.759549
-QuickSort,0.015292,15.491529,13.087668
-InsertionSort,6.089645,0.000625,11.468353
-ShellSort,6.137673,0.000495,13.932273
+Algoritmos       | Caso médio | Melhor caso |   Pior caso
+=========================================================
+Bubblesort       |   0.003676 |    0.001311 |    0.005607 
+QuickSort        |   0.000117 |    0.003160 |    0.002470 
+SelectionSort    |   0.001568 |    0.001494 |    0.001646 
+HeapSort         |   0.000253 |    0.000246 |    0.000216 
+InsertionSort    |   0.000007 |    0.001254 |    0.002448 
+ShellSort        |   0.000008 |    0.001260 |    0.002502 
+MergeSort        |   0.000214 |    0.000159 |    0.000152 

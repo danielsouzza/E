@@ -1,18 +1,18 @@
-#include <stdio.h>
+#include "util.h"
 #include <time.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "util.h"
-#include "mergeSort.h"
-#include "quickSort.h"
-#include "selectionSort.h"
 #include "heapSort.h"
+#include "quickSort.h"
 #include "shellSort.h"
+#include "mergeSort.h"
 #include "bubbleSort.h"
+#include "selectionSort.h"
 #include "insertionSort.h"
 
-const int t = 80000; // Tamanho do vetor
+const int t = 1000; // Tamanho do vetor
 
 // Gerar um vetor aleatorio
 void generateVectors(int vetor1[], int vetor2[], int vetor3[],
@@ -54,103 +54,110 @@ void print(int vetor[])
     printf("\n");
 }
 
+void printResultados(FILE *dados)
+{
+    dados = fopen("Tempo de ordenação.txt", "r");
+    char c;
+    c = fgetc(dados);
+    while (c != EOF)
+    {
+        printf("%c", c);
+        c = fgetc(dados);
+        
+    }
+    fclose(dados);
+}
+
+void fprint(FILE * arq, double * tempo, char str[])
+{
+    fprintf(arq,"%-16s ", str);
+    fprintf(arq,"| %10f ", tempo[0]);  
+    fprintf(arq,"| %11f ", tempo[1]);
+    fprintf(arq,"| %11f \n", tempo[2]);
+}
 
 void main()
 {
-
-    FILE *dados = fopen("Tempo de ordenação.txt", "w");
+    FILE *dados = fopen("Tempo de ordenação.txt", "w"); 
 
     double tempo[3]; // Armazena o tempo da ordenação
     int vetor1[t],vetor2[t], vetor3[t], vetor4[t], vetor5[t],vetor6[t], vetor7[t];
     int end = t - 1;
     generateVectors(vetor1, vetor2, vetor3, vetor4, vetor5, vetor6, vetor7);
 
+    
     if(dados == NULL)
     {
         printf("Erro ao abrir o arquivo\n");
         exit(1);
     }
 
-    fprintf(dados,"Algoritmos,Caso médio,Melhor caso,Pior caso\n");
- 
-    // Merge Sort
-    tempo[0] = TimeMerge(vetor1, end); // Médio
-    tempo[1] = TimeMerge(vetor1, end); // Melhor
-    invertVector(vetor1);
-    tempo[2] = TimeMerge(vetor1, end); // Pior
 
-    fprintf(dados,"%s", "MergeSort,"); 
-    fprintf(dados,"%f,", tempo[0]);  
-    fprintf(dados,"%f,", tempo[1]);
-    fprintf(dados,"%f\n", tempo[2]);
-
+    fprintf(dados,"%-16s | %11s | %11s | %11s\n", "Algoritmos", "Caso médio","Melhor caso","Pior caso");
+    fprintf(dados,"=========================================================\n");
 
     // Bubblesort
-    tempo[0] = TimeBubble(vetor2, t);
-    tempo[1] = TimeBubble(vetor2, t);
-    invertVector(vetor2);
-    tempo[2] = TimeBubble(vetor2, t);
-
-    fprintf(dados,"%s", "BubbleSort,");
-    fprintf(dados,"%f,", tempo[0]);  
-    fprintf(dados,"%f,", tempo[1]);
-    fprintf(dados,"%f\n", tempo[2]);
-    
-
+    tempo[0] = TimeBubble(vetor1, t);
+    tempo[1] = TimeBubble(vetor1, t);
+    invertVector(vetor1);
+    tempo[2] = TimeBubble(vetor1, t);
+    char Bubble[] = "Bubblesort";
+    fprint(dados, tempo, Bubble);
+ 
     // QuickSort
-    tempo[0] = TimeQuick(vetor3, end);
-    tempo[1] = TimeQuick(vetor3, end);
-    invertVector(vetor3);
-    tempo[2] = TimeQuick(vetor3, end);
+    tempo[0] = TimeQuick(vetor2, end);
+    tempo[1] = TimeQuick(vetor2, end);
+    invertVector(vetor2);
+    tempo[2] = TimeQuick(vetor2, end);
 
-    fprintf(dados,"%s", "QuickSort,");
-    fprintf(dados,"%f,", tempo[0]);  
-    fprintf(dados,"%f,", tempo[1]);
-    fprintf(dados,"%f\n", tempo[2]);
+    char Quick[] = "QuickSort";
+    fprint(dados, tempo, Quick);
 
 	// SelectionSort
-	tempo[0] = TimeSelection(vetor6, t);
-	tempo[1] = TimeSelection(vetor6, t);
-	invertVector(vetor6);
-	tempo[2] = TimeSelection(vetor6, t);
+	tempo[0] = TimeSelection(vetor3, t);
+	tempo[1] = TimeSelection(vetor3, t);
+	invertVector(vetor3);
+	tempo[2] = TimeSelection(vetor3, t);
 
-	fprintf(dados, "%s", "SelectionSort,");
-	fprintf(dados, "%f,", tempo[0]);
-	fprintf(dados, "%f,", tempo[1]);
-	fprintf(dados, "%f\n", tempo[2]);
+    char Selection[] = "SelectionSort";
+    fprint(dados, tempo, Selection);
 
 	// HeapSort
-	tempo[0] = TimeHeap(vetor7, t);
-	tempo[1] = TimeHeap(vetor7, t);
-	invertVector(vetor7);
-	tempo[2] = TimeHeap(vetor7, t);
+	tempo[0] = TimeHeap(vetor4, t);
+	tempo[1] = TimeHeap(vetor4, t);
+	invertVector(vetor4);
+	tempo[2] = TimeHeap(vetor4, t);
 	
-	fprintf(dados, "%s", "HeapSort,");
-	fprintf(dados, "%f,", tempo[0]);
-	fprintf(dados, "%f,", tempo[1]);
-	fprintf(dados, "%f\n", tempo[2]);
+	char Heap[] = "HeapSort";
+    fprint(dados, tempo, Heap);
 
     // InsertionSort
-    tempo[0] = TimeInsertion(vetor4, t);
-    tempo[1] = TimeInsertion(vetor4, t);
-    invertVector(vetor4);
-    tempo[2] = TimeInsertion(vetor4, t);
-
-    fprintf(dados,"%s", "InsertionSort,");
-    fprintf(dados,"%f,", tempo[0]);  
-    fprintf(dados,"%f,", tempo[1]);
-    fprintf(dados,"%f\n", tempo[2]);
-
-    // ShellSort
-    tempo[0] = TimeInsertion(vetor5, t);
     tempo[1] = TimeInsertion(vetor5, t);
+    tempo[0] = TimeInsertion(vetor5, t);
     invertVector(vetor5);
     tempo[2] = TimeInsertion(vetor5, t);
 
-    fprintf(dados,"%s", "ShellSort,");
-    fprintf(dados,"%f,", tempo[0]);  
-    fprintf(dados,"%f,", tempo[1]);
-    fprintf(dados,"%f\n", tempo[2]);
+    char Insertion[] = "InsertionSort";
+    fprint(dados, tempo, Insertion);
+
+    // ShellSort
+    tempo[1] = TimeInsertion(vetor6, t);
+    tempo[0] = TimeInsertion(vetor6, t);
+    invertVector(vetor6);
+    tempo[2] = TimeInsertion(vetor6, t);
+ 
+    char Shell[] = "ShellSort";
+    fprint(dados, tempo, Shell);
+
+    // Merge Sort
+    tempo[0] = TimeMerge(vetor7, end); // Médio
+    tempo[1] = TimeMerge(vetor7, end); // Melhor
+    invertVector(vetor7);
+    tempo[2] = TimeMerge(vetor7, end); // Pior
+
+    char Merge[] = "MergeSort";
+    fprint(dados, tempo, Merge);
+
+    fclose(dados);
+    printResultados(dados);
 }
-
-
