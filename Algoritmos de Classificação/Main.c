@@ -12,7 +12,7 @@
 #include "selectionSort.h"
 #include "insertionSort.h"
 
-const int t = 1000; // Tamanho do vetor
+const int t = 120000; // Tamanho do vetor
 
 // Gerar um vetor aleatorio
 void generateVectors(int vetor1[], int vetor2[], int vetor3[],
@@ -44,16 +44,7 @@ void invertVector(int vetor[])
     }
 }
 
-// Função para imprimir
-void print(int vetor[])
-{
-    for (int i = 0; i < t; i++)
-    {
-        printf("[%d] ", vetor[i]);
-    }
-    printf("\n");
-}
-
+// imprime na tela os dados do arquivo 
 void printResultados(FILE *dados)
 {
     dados = fopen("Tempo de ordenação.txt", "r");
@@ -68,6 +59,7 @@ void printResultados(FILE *dados)
     fclose(dados);
 }
 
+// Coloca os dados no arquivo
 void fprint(FILE * arq, double * tempo, char str[])
 {
     fprintf(arq,"%-16s ", str);
@@ -79,19 +71,16 @@ void fprint(FILE * arq, double * tempo, char str[])
 void main()
 {
     FILE *dados = fopen("Tempo de ordenação.txt", "w"); 
-
     double tempo[3]; // Armazena o tempo da ordenação
     int vetor1[t],vetor2[t], vetor3[t], vetor4[t], vetor5[t],vetor6[t], vetor7[t];
     int end = t - 1;
     generateVectors(vetor1, vetor2, vetor3, vetor4, vetor5, vetor6, vetor7);
-
     
     if(dados == NULL)
     {
         printf("Erro ao abrir o arquivo\n");
         exit(1);
     }
-
 
     fprintf(dados,"%-16s | %11s | %11s | %11s\n", "Algoritmos", "Caso médio","Melhor caso","Pior caso");
     fprintf(dados,"=========================================================\n");
@@ -150,10 +139,10 @@ void main()
     fprint(dados, tempo, Shell);
 
     // Merge Sort
-    tempo[0] = TimeMerge(vetor7, end); // Médio
-    tempo[1] = TimeMerge(vetor7, end); // Melhor
+    tempo[0] = TimeMerge(vetor7, end);
+    tempo[1] = TimeMerge(vetor7, end);
     invertVector(vetor7);
-    tempo[2] = TimeMerge(vetor7, end); // Pior
+    tempo[2] = TimeMerge(vetor7, end); 
 
     char Merge[] = "MergeSort";
     fprint(dados, tempo, Merge);
