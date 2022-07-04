@@ -70,12 +70,13 @@ void imprimeFila(FILA *f) //Imprime do topo para a base da fila
     NO *ptr = f -> ini;
     if(ptr != NULL)
     {
-        printf("Elementos na fila:\n");
+        printf("Elementos na fila: ");
         while(ptr != NULL)
         {
-            printf("%3d", ptr->dado);
+            printf("%d ", ptr->dado);
             ptr = ptr->prox;
         }
+        printf("\n");
     }
     else{
         printf("Fila vazia\n");
@@ -99,29 +100,66 @@ void removeTopo(FILA *f) //Desenfileirar, Excluir_elemento (topo da fila)
 
 }
 
+void menu()
+{
+    printf("[1] - Insert element\n");
+    printf("[2] - Show all data\n");
+    printf("[3] - initialize queue\n");
+    printf("[4] - Show Top element\n");
+    printf("[5] - Check empty queue\n");
+    printf("[6] - delete top element\n");
+    printf("[0] - Exit\n");
+}
+
+
 int main()
 {
     FILA *q = (FILA*) malloc(sizeof(FILA));
+    int choce, dado;
     if(q==NULL)
     {
         printf("Erro na memória");
         exit(1);
-    }else{
-        inicializaFila(q);
-
-        checkFilaVazia(q);
-
-        inserirFila(1, q); //q aponta para a Struct FILA, q -> queue
-        inserirFila(2, q);
-        inserirFila(3, q);
-        inserirFila(4, q);
-
-        removeTopo(q);
-
-        consultaFila(q);
-
-        imprimeFila(q);
-    }    
+    }
+    while (choce != 0)
+    {
+        system("clear");
+        menu();
+        scanf("%d",&choce);
+        fflush(stdin);
+        system("clear");
+        switch (choce)
+        {  
+            case 1:
+                printf("Enter a value: ");
+                scanf("%d", &dado);
+                inserirFila(dado, q); //q aponta para a Struct FILA, q -> queue
+                getchar();
+                break;
+            case 2:
+                imprimeFila(q);
+                getchar();getchar();
+                break;
+            case 3:
+                inicializaFila(q);
+                printf("Queue initialized...\n");
+                getchar();
+                break;
+            case 4:
+                consultaFila(q);
+                getchar();getchar();
+                break;
+            case 5:
+                checkFilaVazia(q);
+                getchar();getchar();
+                break;
+            case 6:
+                removeTopo(q);
+                getchar();getchar();
+                break;
+        }
+    }
+    free(q);
 }
 
 

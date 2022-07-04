@@ -1,6 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct Step
+{
+    int dado;
+    struct Step * prox;
+}Step;
+
+typedef struct Pilha
+{
+    Step * top;
+    int size;
+}Pilha;
+
 int deleteMy(int dado, Pilha *pilha)
 {
     Step * remover = pilha->top; // Step = No de uma pilha 
