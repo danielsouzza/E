@@ -94,9 +94,9 @@ int main() {
 		puts("0) Finalizar programa");
 		scanf("%u", &o);
 
+		int elemento;
 		switch (o) {
 			case 1:
-				int elemento;
 				scanf("%d", &elemento);
 				Inserir_Elemento(elemento);
 				break;
