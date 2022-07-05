@@ -17,6 +17,7 @@ typedef struct FILA
 
 void inicializaFila(FILA *f) //Inicializa a fila
 {
+    printf("Fila inicializada!\n\n");
     f->ini=NULL;
     f->fim=NULL;
 }
@@ -62,7 +63,6 @@ void consultaFila(FILA *f) //Lê~Imprime topo da fila
     else{
         printf("Fila vazia\n");
     }
-    //return 1;
 }
 
 void imprimeFila(FILA *f) //Imprime do topo para a base da fila
@@ -81,7 +81,6 @@ void imprimeFila(FILA *f) //Imprime do topo para a base da fila
     else{
         printf("Fila vazia\n");
     }
-    //return 1;
 }
 
 void removeTopo(FILA *f) //Desenfileirar, Excluir_elemento (topo da fila)
@@ -97,77 +96,60 @@ void removeTopo(FILA *f) //Desenfileirar, Excluir_elemento (topo da fila)
     }else{
         printf("Fila vazia\n");
     }
-
 }
 
 void menu()
 {
-    printf("[1] - Insert element\n");
-    printf("[2] - Show all data\n");
-    printf("[3] - initialize queue\n");
-    printf("[4] - Show Top element\n");
-    printf("[5] - Check empty queue\n");
-    printf("[6] - delete top element\n");
-    printf("[0] - Exit\n");
+    printf("[1] - Check_Fila_vazia\n");
+    printf("[2] - Inserir_Elemento\n");
+    printf("[3] - Excluir_Elemento_Topo\n");
+    printf("[4] - Lê_Topo_Fila\n");
+    printf("[5] - Imprimir_Fila\n");
+    printf("[0] - Exit\n\n");
 }
-
 
 int main()
 {
     FILA *q = (FILA*) malloc(sizeof(FILA));
-    int choce, dado;
+    int opc, dado;
     if(q==NULL)
     {
         printf("Erro na memória");
         exit(1);
     }
-    while (choce != 0)
+    inicializa(q);
+    while (opc != 0)
     {
-        system("clear");
         menu();
         scanf("%d",&choce);
         fflush(stdin);
         system("clear");
-        switch (choce)
+        switch(opc)
         {  
             case 1:
-                printf("Enter a value: ");
-                scanf("%d", &dado);
-                inserirFila(dado, q); //q aponta para a Struct FILA, q -> queue
-                getchar();
-                break;
-            case 2:
-                imprimeFila(q);
+                checkFilaVazia(q);
                 getchar();getchar();
                 break;
-            case 3:
-                inicializaFila(q);
-                printf("Queue initialized...\n");
+            case 2:
+                printf("Insira um elemento: ");
+                scanf("%d", &dado);
+                inserirFila(dado, q); //'q' aponta para a Struct FILA
                 getchar();
+                break;
+            case 3:
+                removeTopo(q);
+                getchar();getchar();
                 break;
             case 4:
                 consultaFila(q);
                 getchar();getchar();
                 break;
             case 5:
-                checkFilaVazia(q);
-                getchar();getchar();
-                break;
-            case 6:
-                removeTopo(q);
+                imprimeFila(q);
                 getchar();getchar();
                 break;
         }
+        system("clear");
     }
-    free(q);
+    free(q); //libera a memória alocada
 }
-
-
-
-
-
-
-
-/*
-free(q); //libera memória alocada
-*/
