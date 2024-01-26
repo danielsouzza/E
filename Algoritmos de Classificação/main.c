@@ -16,32 +16,32 @@ const int t = 120000; // Tamanho do vetor
 
 // Gerar um vetor aleatorio
 void generateVectors(int vetor1[], int vetor2[], int vetor3[],
-int vetor4[],int vetor5[],int vetor6[],int vetor7[])
+                     int vetor4[],int vetor5[],int vetor6[],int vetor7[])
 {
-    srand(time(NULL)); // Gera uma semente comforme o tempo
-    for (int i = 0; i < t; i++)
+  srand(time(NULL)); // Gera uma semente comforme o tempo
+  for (int i = 0; i < t; i++)
     {
-        int aux = rand() % t;
-        vetor1[i] = aux;
-        vetor2[i] = aux;
-        vetor3[i] = aux;
-        vetor4[i] = aux;
-        vetor5[i] = aux;
-        vetor6[i] = aux;
-        vetor7[i] = aux;
-    }
+    int aux = rand() % t;
+    vetor1[i] = aux;
+    vetor2[i] = aux;
+    vetor3[i] = aux;
+    vetor4[i] = aux;
+    vetor5[i] = aux;
+    vetor6[i] = aux;
+    vetor7[i] = aux;
+  }
 }
 
 // Inverte o vetor
 void invertVector(int vetor[])
 {
-    int mid = t / 2;
-    for (int i = 0, j = t - 1; i < mid; i++, j--)
+  int mid = t / 2;
+  for (int i = 0, j = t - 1; i < mid; i++, j--)
     {
-        int aux = vetor[i];
-        vetor[i] = vetor[j];
-        vetor[j] = aux;
-    }
+    int aux = vetor[i];
+    vetor[i] = vetor[j];
+    vetor[j] = aux;
+  }
 }
 
 // imprime na tela os dados do arquivo 
@@ -54,13 +54,13 @@ void printResultados(FILE *dados)
     {
         printf("%c", c);
         c = fgetc(dados);
-        
+
     }
     fclose(dados);
-}
+  }
 
 // Coloca os dados no arquivo
-void fprint(FILE * arq, double * tempo, char str[])
+  void fprint(FILE * arq, double * tempo, char str[])
 {
     fprintf(arq,"%-16s ", str);
     fprintf(arq,"| %10f ", tempo[0]);  
@@ -68,31 +68,31 @@ void fprint(FILE * arq, double * tempo, char str[])
     fprintf(arq,"| %11f \n", tempo[2]);
 }
 
-void main()
+  void main()
 {
-    FILE *dados = fopen("Tempo de ordenação.txt", "w"); 
+FILE *dados = fopen("Tempo de ordenação.txt", "w"); 
     double tempo[3]; // Armazena o tempo da ordenação
-    int vetor1[t],vetor2[t], vetor3[t], vetor4[t], vetor5[t],vetor6[t], vetor7[t];
+int vetor1[t],vetor2[t], vetor3[t], vetor4[t], vetor5[t],vetor6[t], vetor7[t];
     int end = t - 1;
-    generateVectors(vetor1, vetor2, vetor3, vetor4, vetor5, vetor6, vetor7);
-    
-    if(dados == NULL)
-    {
-        printf("Erro ao abrir o arquivo\n");
-        exit(1);
-    }
+generateVectors(vetor1, vetor2, vetor3, vetor4, vetor5, vetor6, vetor7);
 
-    fprintf(dados,"%-16s | %11s | %11s | %11s\n", "Algoritmos", "Caso médio","Melhor caso","Pior caso");
+    if(dados == NULL)
+{
+printf("Erro ao abrir o arquivo\n");
+      exit(1);
+}
+
+fprintf(dados,"%-16s | %11s | %11s | %11s\n", "Algoritmos", "Caso médio","Melhor caso","Pior caso");
     fprintf(dados,"=========================================================\n");
 
-    // Bubblesort
+// Bubblesort
     tempo[0] = TimeBubble(vetor1, t);
     tempo[1] = TimeBubble(vetor1, t);
     invertVector(vetor1);
     tempo[2] = TimeBubble(vetor1, t);
     char Bubble[] = "Bubblesort";
     fprint(dados, tempo, Bubble);
- 
+
     // QuickSort
     tempo[0] = TimeQuick(vetor2, end);
     tempo[1] = TimeQuick(vetor2, end);
@@ -103,24 +103,24 @@ void main()
     fprint(dados, tempo, Quick);
 
 	// SelectionSort
-	tempo[0] = TimeSelection(vetor3, t);
+    tempo[0] = TimeSelection(vetor3, t);
 	tempo[1] = TimeSelection(vetor3, t);
-	invertVector(vetor3);
-	tempo[2] = TimeSelection(vetor3, t);
+    invertVector(vetor3);
+        tempo[2] = TimeSelection(vetor3, t);
 
     char Selection[] = "SelectionSort";
-    fprint(dados, tempo, Selection);
+        fprint(dados, tempo, Selection);
 
-	// HeapSort
-	tempo[0] = TimeHeap(vetor4, t);
+    // HeapSort
+        tempo[0] = TimeHeap(vetor4, t);
 	tempo[1] = TimeHeap(vetor4, t);
-	invertVector(vetor4);
+        invertVector(vetor4);
 	tempo[2] = TimeHeap(vetor4, t);
-	
-	char Heap[] = "HeapSort";
+
+        char Heap[] = "HeapSort";
     fprint(dados, tempo, Heap);
 
-    // InsertionSort
+        // InsertionSort
     tempo[1] = TimeInsertion(vetor5, t);
     tempo[0] = TimeInsertion(vetor5, t);
     invertVector(vetor5);
@@ -134,7 +134,7 @@ void main()
     tempo[0] = TimeInsertion(vetor6, t);
     invertVector(vetor6);
     tempo[2] = TimeInsertion(vetor6, t);
- 
+
     char Shell[] = "ShellSort";
     fprint(dados, tempo, Shell);
 
